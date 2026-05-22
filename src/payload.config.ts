@@ -8,6 +8,15 @@ import { Media } from './collections/Media'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { ru } from '@payloadcms/translations/languages/ru'
 import { Teachers } from './collections/Teachers'
+// import { MainTitle } from './globals/MainTitle'
+// import { MainBanner } from './globals/MainBanner'
+// import { AboutUs } from './globals/AboutUs'
+// import { WebsiteInfo } from './globals/WebsiteInfo'
+// import { Contacts } from './collections/Contacts'
+import { Groups } from './collections/Groups'
+// import { Holidays } from './collections/Holidays'
+// import { Socials } from './collections/Socials'
+// import { Spellings } from './collections/Spellings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,8 +27,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    timezones: { defaultTimezone: 'Asia/Almaty' },
   },
-  collections: [Users, Media, Teachers],
+  collections: [Users, Media, Teachers, Groups],
+  // globals: [AboutUs, MainTitle, MainBanner, WebsiteInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
