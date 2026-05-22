@@ -14,6 +14,7 @@ import { Teachers } from './collections/Teachers'
 // import { WebsiteInfo } from './globals/WebsiteInfo'
 // import { Contacts } from './collections/Contacts'
 import { Groups } from './collections/Groups'
+import { Students } from './collections/Students'
 // import { Holidays } from './collections/Holidays'
 // import { Socials } from './collections/Socials'
 // import { Spellings } from './collections/Spellings'
@@ -29,7 +30,7 @@ export default buildConfig({
     },
     timezones: { defaultTimezone: 'Asia/Almaty' },
   },
-  collections: [Users, Media, Teachers, Groups],
+  collections: [Users, Media, Teachers, Groups, Students],
   // globals: [AboutUs, MainTitle, MainBanner, WebsiteInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

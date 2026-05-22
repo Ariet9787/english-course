@@ -2,6 +2,7 @@ import * as migration_20260409_155706_initial from './20260409_155706_initial';
 import * as migration_20260520_135354_add_role_to_users from './20260520_135354_add_role_to_users';
 import * as migration_20260520_142343_add_teachers_collection from './20260520_142343_add_teachers_collection';
 import * as migration_20260522_140016_add_groups_collection from './20260522_140016_add_groups_collection';
+import * as migration_20260522_142612_add_students_collection from './20260522_142612_add_students_collection';
 
 export const migrations = [
   {
@@ -22,6 +23,11 @@ export const migrations = [
   {
     up: migration_20260522_140016_add_groups_collection.up,
     down: migration_20260522_140016_add_groups_collection.down,
-    name: '20260522_140016_add_groups_collection'
+    name: '20260522_140016_add_groups_collection',
+  },
+  {
+    up: migration_20260522_142612_add_students_collection.up,
+    down: migration_20260522_142612_add_students_collection.down,
+    name: '20260522_142612_add_students_collection'
   },
 ];

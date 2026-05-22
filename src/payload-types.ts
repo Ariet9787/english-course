@@ -70,11 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     teachers: Teacher;
-    contacts: Contact;
     groups: Group;
-    holidays: Holiday;
-    socials: Social;
-    spellings: Spelling;
+    students: Student;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -85,11 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     teachers: TeachersSelect<false> | TeachersSelect<true>;
-    contacts: ContactsSelect<false> | ContactsSelect<true>;
     groups: GroupsSelect<false> | GroupsSelect<true>;
-    holidays: HolidaysSelect<false> | HolidaysSelect<true>;
-    socials: SocialsSelect<false> | SocialsSelect<true>;
-    spellings: SpellingsSelect<false> | SpellingsSelect<true>;
+    students: StudentsSelect<false> | StudentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -99,18 +93,8 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {
-    'about-us': AboutUs;
-    'main-title': MainTitle;
-    'main-banner': MainBanner;
-    'website-info': WebsiteInfo;
-  };
-  globalsSelect: {
-    'about-us': AboutUsSelect<false> | AboutUsSelect<true>;
-    'main-title': MainTitleSelect<false> | MainTitleSelect<true>;
-    'main-banner': MainBannerSelect<false> | MainBannerSelect<true>;
-    'website-info': WebsiteInfoSelect<false> | WebsiteInfoSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -204,17 +188,6 @@ export interface Teacher {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contacts".
- */
-export interface Contact {
-  id: number;
-  contactName: string;
-  contactLink: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "groups".
  */
 export interface Group {
@@ -235,44 +208,18 @@ export interface Group {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "holidays".
+ * via the `definition` "students".
  */
-export interface Holiday {
+export interface Student {
   id: number;
-  title: string;
-  image: number | Media;
-  describe: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "socials".
- */
-export interface Social {
-  id: number;
-  title: string;
-  link?: string | null;
-  qrCode?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "spellings".
- */
-export interface Spelling {
-  id: number;
-  'spelling-title': string;
-  'spelling-words':
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
+  user?: (number | null) | User;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  phone?: string | null;
+  parentsPhone: string;
+  level: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';
+  group: number | Group;
   updatedAt: string;
   createdAt: string;
 }
@@ -313,24 +260,12 @@ export interface PayloadLockedDocument {
         value: number | Teacher;
       } | null)
     | ({
-        relationTo: 'contacts';
-        value: number | Contact;
-      } | null)
-    | ({
         relationTo: 'groups';
         value: number | Group;
       } | null)
     | ({
-        relationTo: 'holidays';
-        value: number | Holiday;
-      } | null)
-    | ({
-        relationTo: 'socials';
-        value: number | Social;
-      } | null)
-    | ({
-        relationTo: 'spellings';
-        value: number | Spelling;
+        relationTo: 'students';
+        value: number | Student;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -434,16 +369,6 @@ export interface TeachersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contacts_select".
- */
-export interface ContactsSelect<T extends boolean = true> {
-  contactName?: T;
-  contactLink?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "groups_select".
  */
 export interface GroupsSelect<T extends boolean = true> {
@@ -463,33 +388,17 @@ export interface GroupsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "holidays_select".
+ * via the `definition` "students_select".
  */
-export interface HolidaysSelect<T extends boolean = true> {
-  title?: T;
-  image?: T;
-  describe?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "socials_select".
- */
-export interface SocialsSelect<T extends boolean = true> {
-  title?: T;
-  link?: T;
-  qrCode?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "spellings_select".
- */
-export interface SpellingsSelect<T extends boolean = true> {
-  'spelling-title'?: T;
-  'spelling-words'?: T;
+export interface StudentsSelect<T extends boolean = true> {
+  user?: T;
+  firstName?: T;
+  lastName?: T;
+  fullName?: T;
+  phone?: T;
+  parentsPhone?: T;
+  level?: T;
+  group?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -532,100 +441,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-us".
- */
-export interface AboutUs {
-  id: number;
-  title: string;
-  description: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "main-title".
- */
-export interface MainTitle {
-  id: number;
-  title: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "main-banner".
- */
-export interface MainBanner {
-  id: number;
-  title: string;
-  describe: string;
-  banner: number | Media;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-info".
- */
-export interface WebsiteInfo {
-  id: number;
-  name: string;
-  describe: string;
-  email?: string | null;
-  image?: (number | null) | Media;
-  copyright: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-us_select".
- */
-export interface AboutUsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "main-title_select".
- */
-export interface MainTitleSelect<T extends boolean = true> {
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "main-banner_select".
- */
-export interface MainBannerSelect<T extends boolean = true> {
-  title?: T;
-  describe?: T;
-  banner?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-info_select".
- */
-export interface WebsiteInfoSelect<T extends boolean = true> {
-  name?: T;
-  describe?: T;
-  email?: T;
-  image?: T;
-  copyright?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
