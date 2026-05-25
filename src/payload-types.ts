@@ -74,6 +74,7 @@ export interface Config {
     students: Student;
     socials: Social;
     posts: Post;
+    lessons: Lesson;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     students: StudentsSelect<false> | StudentsSelect<true>;
     socials: SocialsSelect<false> | SocialsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    lessons: LessonsSelect<false> | LessonsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -272,6 +274,37 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lessons".
+ */
+export interface Lesson {
+  id: number;
+  group: number | Group;
+  teacher: number | Teacher;
+  date: string;
+  title: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  lessonMaterials?: (number | Media)[] | null;
+  homework?: string | null;
+  isPublished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -321,6 +354,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'lessons';
+        value: number | Lesson;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -477,6 +514,22 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   describe?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lessons_select".
+ */
+export interface LessonsSelect<T extends boolean = true> {
+  group?: T;
+  teacher?: T;
+  date?: T;
+  title?: T;
+  content?: T;
+  lessonMaterials?: T;
+  homework?: T;
+  isPublished?: T;
   updatedAt?: T;
   createdAt?: T;
 }

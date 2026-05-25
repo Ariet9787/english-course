@@ -4,6 +4,7 @@ import * as migration_20260520_142343_add_teachers_collection from './20260520_1
 import * as migration_20260522_140016_add_groups_collection from './20260522_140016_add_groups_collection';
 import * as migration_20260522_142612_add_students_collection from './20260522_142612_add_students_collection';
 import * as migration_20260525_135546_add_posts_socials_and_websiteinfo_collections from './20260525_135546_add_posts_socials_and_websiteinfo_collections';
+import * as migration_20260525_142750_add_lessons_collection from './20260525_142750_add_lessons_collection';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260525_135546_add_posts_socials_and_websiteinfo_collections.up,
     down: migration_20260525_135546_add_posts_socials_and_websiteinfo_collections.down,
-    name: '20260525_135546_add_posts_socials_and_websiteinfo_collections'
+    name: '20260525_135546_add_posts_socials_and_websiteinfo_collections',
+  },
+  {
+    up: migration_20260525_142750_add_lessons_collection.up,
+    down: migration_20260525_142750_add_lessons_collection.down,
+    name: '20260525_142750_add_lessons_collection'
   },
 ];
