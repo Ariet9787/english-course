@@ -72,6 +72,8 @@ export interface Config {
     teachers: Teacher;
     groups: Group;
     students: Student;
+    socials: Social;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     teachers: TeachersSelect<false> | TeachersSelect<true>;
     groups: GroupsSelect<false> | GroupsSelect<true>;
     students: StudentsSelect<false> | StudentsSelect<true>;
+    socials: SocialsSelect<false> | SocialsSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -93,8 +97,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'website-info': WebsiteInfo;
+  };
+  globalsSelect: {
+    'website-info': WebsiteInfoSelect<false> | WebsiteInfoSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -225,6 +233,45 @@ export interface Student {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials".
+ */
+export interface Social {
+  id: number;
+  title: string;
+  link?: string | null;
+  Icon: number | Media;
+  qrCode?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  image: number | Media;
+  describe: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -266,6 +313,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'students';
         value: number | Student;
+      } | null)
+    | ({
+        relationTo: 'socials';
+        value: number | Social;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -404,6 +459,29 @@ export interface StudentsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials_select".
+ */
+export interface SocialsSelect<T extends boolean = true> {
+  title?: T;
+  link?: T;
+  Icon?: T;
+  qrCode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  describe?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -441,6 +519,38 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-info".
+ */
+export interface WebsiteInfo {
+  id: number;
+  name: string;
+  describe: string;
+  email?: string | null;
+  logo?: (number | null) | Media;
+  socials: (number | Social)[];
+  phone: string;
+  addres: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-info_select".
+ */
+export interface WebsiteInfoSelect<T extends boolean = true> {
+  name?: T;
+  describe?: T;
+  email?: T;
+  logo?: T;
+  socials?: T;
+  phone?: T;
+  addres?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

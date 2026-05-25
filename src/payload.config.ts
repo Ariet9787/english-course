@@ -11,12 +11,11 @@ import { Teachers } from './collections/Teachers'
 // import { MainTitle } from './globals/MainTitle'
 // import { MainBanner } from './globals/MainBanner'
 // import { AboutUs } from './globals/AboutUs'
-// import { WebsiteInfo } from './globals/WebsiteInfo'
-// import { Contacts } from './collections/Contacts'
+import { Company } from './globals/WebsiteInfo'
 import { Groups } from './collections/Groups'
 import { Students } from './collections/Students'
-// import { Holidays } from './collections/Holidays'
-// import { Socials } from './collections/Socials'
+import { Posts } from './collections/Posts'
+import { Socials } from './collections/Socials'
 // import { Spellings } from './collections/Spellings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -30,8 +29,8 @@ export default buildConfig({
     },
     timezones: { defaultTimezone: 'Asia/Almaty' },
   },
-  collections: [Users, Media, Teachers, Groups, Students],
-  // globals: [AboutUs, MainTitle, MainBanner, WebsiteInfo],
+  collections: [Users, Media, Teachers, Groups, Students, Socials, Posts],
+  globals: [Company],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
