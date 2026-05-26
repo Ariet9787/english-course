@@ -10,7 +10,7 @@ import { ru } from '@payloadcms/translations/languages/ru'
 import { Teachers } from './collections/Teachers'
 // import { MainTitle } from './globals/MainTitle'
 // import { MainBanner } from './globals/MainBanner'
-// import { AboutUs } from './globals/AboutUs'
+import { AboutUs } from './globals/AboutUs'
 import { Company } from './globals/WebsiteInfo'
 import { Groups } from './collections/Groups'
 import { Students } from './collections/Students'
@@ -31,7 +31,7 @@ export default buildConfig({
     timezones: { defaultTimezone: 'Asia/Almaty' },
   },
   collections: [Users, Media, Teachers, Groups, Students, Socials, Posts, Lessons],
-  globals: [Company],
+  globals: [Company, AboutUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

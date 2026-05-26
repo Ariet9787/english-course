@@ -101,9 +101,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'website-info': WebsiteInfo;
+    'about-us': AboutUs;
   };
   globalsSelect: {
     'website-info': WebsiteInfoSelect<false> | WebsiteInfoSelect<true>;
+    'about-us': AboutUsSelect<false> | AboutUsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -586,6 +588,33 @@ export interface WebsiteInfo {
   socials: (number | Social)[];
   phone: string;
   addres: string;
+  banner: number | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us".
+ */
+export interface AboutUs {
+  id: number;
+  title: string;
+  banner: number | Media;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -601,6 +630,19 @@ export interface WebsiteInfoSelect<T extends boolean = true> {
   socials?: T;
   phone?: T;
   addres?: T;
+  banner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us_select".
+ */
+export interface AboutUsSelect<T extends boolean = true> {
+  title?: T;
+  banner?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

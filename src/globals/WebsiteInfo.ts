@@ -54,5 +54,11 @@ export const Company: GlobalConfig = {
       required: true,
       label: 'Адрес',
     },
+    {
+      name: 'banner',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
   ],
 }
