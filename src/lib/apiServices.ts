@@ -12,5 +12,3 @@ export const getSocials = async () =>
   payload.find({
     collection: 'socials',
   })
-
-export const getById = async ({ collection, id }) => payload.findByID({ collection, id })
