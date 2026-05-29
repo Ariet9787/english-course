@@ -301,7 +301,23 @@ export interface Lesson {
   };
   lessonMaterials?: (number | Media)[] | null;
   homework?: string | null;
-  isPublished?: boolean | null;
+  attendanceExceptions?:
+    | {
+        student: number | Student;
+        status: 'absent' | 'lated';
+        comment?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  grades?:
+    | {
+        student: number | Student;
+        grade: number;
+        type: 'activity' | 'homeworks' | 'tests';
+        comment?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -531,7 +547,23 @@ export interface LessonsSelect<T extends boolean = true> {
   content?: T;
   lessonMaterials?: T;
   homework?: T;
-  isPublished?: T;
+  attendanceExceptions?:
+    | T
+    | {
+        student?: T;
+        status?: T;
+        comment?: T;
+        id?: T;
+      };
+  grades?:
+    | T
+    | {
+        student?: T;
+        grade?: T;
+        type?: T;
+        comment?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
