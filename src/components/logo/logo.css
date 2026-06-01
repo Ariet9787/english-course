@@ -1,0 +1,15 @@
+.logo-link {
+  flex-shrink: 0;
+}
+
+.header-logo {
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+  transition: var(--transition);
+}
+
+.header-logo:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
