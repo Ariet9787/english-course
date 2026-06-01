@@ -21,10 +21,11 @@ async function Logo() {
     <Link className="logo-link" href="/">
       <Image
         className="header-logo"
-        alt={webData.logo?.alt || 'logo'}
-        src={webData.logo?.url}
+        alt={logo.alt || 'logo'}
+        src={logo.url}
         width={220}
         height={108}
+        priority
       />
     </Link>
   )
