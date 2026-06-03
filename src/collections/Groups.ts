@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
+import { groudReadAccess } from '@/access/groupReadAccess'
 
 export const Groups: CollectionConfig = {
   slug: 'groups',
+  access: {
+    read: groudReadAccess,
+  },
   labels: {
     singular: 'Группа',
     plural: 'Группы',

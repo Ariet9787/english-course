@@ -1,7 +1,10 @@
+import { lessonReadAccess } from '@/access/lessonReadAccess'
 import type { CollectionConfig } from 'payload'
-import { relationship } from 'payload/shared'
 export const Lessons: CollectionConfig = {
   slug: 'lessons',
+  access: {
+    read: lessonReadAccess,
+  },
   labels: {
     singular: 'Урок',
     plural: 'Уроки',
