@@ -1,4 +1,5 @@
 import { lessonReadAccess } from '@/access/lessonReadAccess'
+import { Where } from 'payload'
 import type { CollectionConfig } from 'payload'
 export const Lessons: CollectionConfig = {
   slug: 'lessons',
@@ -30,8 +31,13 @@ export const Lessons: CollectionConfig = {
                   required: true,
                   filterOptions: async ({ req }) => {
                     const { user } = req
+
                     if (!user) return false
-                    if (user.role === 'admin' || user.role === 'manager') return true
+
+                    if (user.role === 'admin' || user.role === 'manager') {
+                      return true
+                    }
+
                     if (user.role === 'teacher') {
                       const teacherResult = await req.payload.find({
                         collection: 'teachers',
@@ -42,15 +48,21 @@ export const Lessons: CollectionConfig = {
                         },
                         limit: 1,
                       })
+
                       const teacher = teacherResult.docs[0]
-                      if (!teacher) return false
+
+                      if (!teacher) {
+                        return false
+                      }
+
                       return {
                         teacher: {
                           equals: teacher.id,
                         },
                       }
-                      return false
                     }
+
+                    return false
                   },
                 },
                 {
