@@ -619,8 +619,17 @@ export interface WebsiteInfo {
   logo?: (number | null) | Media;
   socials: (number | Social)[];
   phone: string;
+  WhatsApp: string;
   addres: string;
   banner: number | Media;
+  features?:
+    | {
+        icon: number | Media;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  classImages: (number | Media)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -661,8 +670,17 @@ export interface WebsiteInfoSelect<T extends boolean = true> {
   logo?: T;
   socials?: T;
   phone?: T;
+  WhatsApp?: T;
   addres?: T;
   banner?: T;
+  features?:
+    | T
+    | {
+        icon?: T;
+        description?: T;
+        id?: T;
+      };
+  classImages?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

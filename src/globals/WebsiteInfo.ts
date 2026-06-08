@@ -1,5 +1,6 @@
 import { companyReadAccess } from '@/access/companyReadAccess'
 import type { GlobalConfig } from 'payload'
+import { array, relationship } from 'payload/shared'
 
 export const Company: GlobalConfig = {
   slug: 'website-info',
@@ -50,6 +51,12 @@ export const Company: GlobalConfig = {
       label: 'Номер Телефона',
     },
     {
+      name: 'WhatsApp',
+      type: 'text',
+      required: true,
+      label: 'WhatsApp контакт',
+    },
+    {
       name: 'addres',
       type: 'textarea',
       required: true,
@@ -60,6 +67,44 @@ export const Company: GlobalConfig = {
       type: 'upload',
       relationTo: 'media',
       required: true,
+    },
+    {
+      name: 'features',
+      type: 'array',
+      label: 'Преимущества компании',
+      labels: {
+        singular: 'Преимущество',
+        plural: 'Преимущества',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'icon',
+              type: 'relationship',
+              relationTo: 'media',
+              required: true,
+              hasMany: false,
+              label: 'Иконка',
+            },
+            {
+              name: 'description',
+              type: 'text',
+              required: true,
+              label: 'Описание',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'classImages',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      hasMany: true,
+      label: 'Фотографии кабинетов',
     },
   ],
 }
