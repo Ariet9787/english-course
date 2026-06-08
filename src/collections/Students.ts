@@ -1,3 +1,4 @@
+import { studentReadAccess } from '@/access/studentReadAccess'
 import type { CollectionConfig } from 'payload'
 
 export const Students: CollectionConfig = {
@@ -8,6 +9,9 @@ export const Students: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'fullName',
+  },
+  access: {
+    read: studentReadAccess,
   },
   fields: [
     {
