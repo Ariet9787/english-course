@@ -1,3 +1,4 @@
+import { mediaReadAccess } from '@/access/mediaReadAccess'
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
@@ -7,7 +8,7 @@ export const Media: CollectionConfig = {
     plural: 'Медиа',
   },
   access: {
-    read: () => true,
+    read: mediaReadAccess,
   },
   fields: [
     {

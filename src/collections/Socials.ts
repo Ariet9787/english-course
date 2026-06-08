@@ -1,9 +1,10 @@
+import { socialReadAccess } from '@/access/socialReadAccess'
 import type { CollectionConfig } from 'payload'
 
 export const Socials: CollectionConfig = {
   slug: 'socials',
   access: {
-    read: () => true,
+    read: socialReadAccess,
   },
   admin: {
     useAsTitle: 'title',

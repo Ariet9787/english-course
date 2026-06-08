@@ -1,9 +1,10 @@
+import { postReadAccess } from '@/access/postReadAccess'
 import type { CollectionConfig } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
   access: {
-    read: () => true,
+    read: postReadAccess,
   },
   labels: {
     singular: 'Новость',

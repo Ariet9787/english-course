@@ -28,6 +28,30 @@ export const Lessons: CollectionConfig = {
                   type: 'relationship',
                   relationTo: 'groups',
                   required: true,
+                  filterOptions: async ({ req }) => {
+                    const { user } = req
+                    if (!user) return false
+                    if (user.role === 'admin' || user.role === 'manager') return true
+                    if (user.role === 'teacher') {
+                      const teacherResult = await req.payload.find({
+                        collection: 'teachers',
+                        where: {
+                          user: {
+                            equals: user.id,
+                          },
+                        },
+                        limit: 1,
+                      })
+                      const teacher = teacherResult.docs[0]
+                      if (!teacher) return false
+                      return {
+                        teacher: {
+                          equals: teacher.id,
+                        },
+                      }
+                      return false
+                    }
+                  },
                 },
                 {
                   name: 'teacher',
@@ -35,6 +59,25 @@ export const Lessons: CollectionConfig = {
                   relationTo: 'teachers',
                   required: true,
                   label: 'Учитель группы',
+                  admin: {
+                    condition: (_, __, { user }) => {
+                      return user?.role === 'admin' || user?.role === 'manager'
+                    },
+                  },
+                  defaultValue: async ({ req }) => {
+                    const { user } = req
+                    if (user?.role !== 'teacher') return undefined
+                    const teacherResult = await req.payload.find({
+                      collection: 'teachers',
+                      where: {
+                        user: {
+                          equals: user.id,
+                        },
+                      },
+                      limit: 1,
+                    })
+                    return teacherResult.docs[0]?.id
+                  },
                 },
                 {
                   name: 'date',
@@ -96,6 +139,14 @@ export const Lessons: CollectionConfig = {
                       type: 'relationship',
                       relationTo: 'students',
                       required: true,
+                      filterOptions: async ({ data }) => {
+                        if (!data?.group) return false
+                        return {
+                          group: {
+                            equals: data.group,
+                          },
+                        }
+                      },
                     },
                     {
                       name: 'status',
@@ -139,6 +190,14 @@ export const Lessons: CollectionConfig = {
                       type: 'relationship',
                       relationTo: 'students',
                       required: true,
+                      filterOptions: async ({ data }) => {
+                        if (!data?.group) return false
+                        return {
+                          group: {
+                            equals: data.group,
+                          },
+                        }
+                      },
                     },
                     {
                       name: 'grade',

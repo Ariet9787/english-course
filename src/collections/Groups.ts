@@ -24,12 +24,7 @@ export const Groups: CollectionConfig = {
       name: 'teacher',
       label: 'Преподователь группы',
       type: 'relationship',
-      filterOptions: {
-        role: {
-          equals: 'teacher',
-        },
-      },
-      relationTo: 'users',
+      relationTo: 'teachers',
       required: true,
     },
     {

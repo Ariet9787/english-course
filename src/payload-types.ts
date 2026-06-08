@@ -205,7 +205,7 @@ export interface Teacher {
 export interface Group {
   id: number;
   title: string;
-  teacher: number | User;
+  teacher: number | Teacher;
   groupLevel: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';
   schedule?:
     | {
@@ -281,7 +281,7 @@ export interface Post {
 export interface Lesson {
   id: number;
   group: number | Group;
-  teacher: number | Teacher;
+  teacher?: (number | null) | Teacher;
   date: string;
   title: string;
   content: {

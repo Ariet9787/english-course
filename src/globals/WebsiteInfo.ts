@@ -1,9 +1,10 @@
+import { companyReadAccess } from '@/access/companyReadAccess'
 import type { GlobalConfig } from 'payload'
 
 export const Company: GlobalConfig = {
   slug: 'website-info',
   access: {
-    read: () => true,
+    read: companyReadAccess,
   },
   label: {
     singular: 'Компания',

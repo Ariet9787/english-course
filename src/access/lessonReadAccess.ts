@@ -32,12 +32,11 @@ export const lessonReadAccess: Access = async ({ req }) => {
     const groupIds = groupResult.docs.map((group) => group.id)
     if (groupIds.length === 0) return false
 
-    const where: Where = {
+    return {
       group: {
         in: groupIds,
       },
     }
-    return where
   }
 
   if (user.role === 'student') {

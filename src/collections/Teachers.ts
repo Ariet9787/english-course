@@ -1,12 +1,14 @@
-import { fa } from '@payloadcms/translations/languages/fa'
+import { teacherReadAccess } from '@/access/teacherReadAccess'
 import type { CollectionConfig } from 'payload'
-import { select } from 'payload/shared'
 
 export const Teachers: CollectionConfig = {
   slug: 'teachers',
   labels: {
     singular: 'Учитель',
     plural: 'Учителя',
+  },
+  access: {
+    read: teacherReadAccess,
   },
   admin: {
     useAsTitle: 'fullName',

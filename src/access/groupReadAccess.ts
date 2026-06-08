@@ -17,12 +17,11 @@ export const groudReadAccess: Access = async ({ req }) => {
     })
     const teacher = teacherResult.docs[0]
     if (!teacher) return false
-    const where: Where = {
+    return {
       teacher: {
         equals: teacher.id,
       },
     }
-    return where
   }
 
   if (user.role === 'student') {

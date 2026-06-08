@@ -1,3 +1,4 @@
+import { userReadAccess } from '@/access/userReadAccess'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
@@ -5,6 +6,9 @@ export const Users: CollectionConfig = {
   labels: {
     singular: 'Пользователь',
     plural: 'Пользователи',
+  },
+  access: {
+    read: userReadAccess,
   },
   admin: {
     useAsTitle: 'email',
