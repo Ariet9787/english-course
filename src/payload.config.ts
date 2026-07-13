@@ -17,6 +17,7 @@ import { Students } from './collections/Students'
 import { Posts } from './collections/Posts'
 import { Socials } from './collections/Socials'
 import { Lessons } from './collections/Lessons'
+import { Courses } from './collections/Courses'
 // import { Spellings } from './collections/Spellings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -30,7 +31,7 @@ export default buildConfig({
     },
     timezones: { defaultTimezone: 'Asia/Almaty' },
   },
-  collections: [Users, Media, Teachers, Groups, Students, Socials, Posts, Lessons],
+  collections: [Users, Media, Teachers, Groups, Students, Socials, Posts, Lessons, Courses],
   globals: [Company, AboutUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -1,6 +1,6 @@
 import { companyReadAccess } from '@/access/companyReadAccess'
 import type { GlobalConfig } from 'payload'
-import { array, relationship } from 'payload/shared'
+import { array, number, relationship } from 'payload/shared'
 
 export const Company: GlobalConfig = {
   slug: 'website-info',
@@ -106,5 +106,6 @@ export const Company: GlobalConfig = {
       hasMany: true,
       label: 'Фотографии кабинетов',
     },
+
   ],
 }

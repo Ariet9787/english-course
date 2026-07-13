@@ -8,6 +8,7 @@ import * as migration_20260525_142750_add_lessons_collection from './20260525_14
 import * as migration_20260526_164822_add_about_us_global from './20260526_164822_add_about_us_global';
 import * as migration_20260529_141824_update_lessons_collection from './20260529_141824_update_lessons_collection';
 import * as migration_20260608_143130_add_features_and_fields_to_company_info_collection from './20260608_143130_add_features_and_fields_to_company_info_collection';
+import * as migration_20260713_142620_add_courses_collection from './20260713_142620_add_courses_collection';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20260608_143130_add_features_and_fields_to_company_info_collection.up,
     down: migration_20260608_143130_add_features_and_fields_to_company_info_collection.down,
-    name: '20260608_143130_add_features_and_fields_to_company_info_collection'
+    name: '20260608_143130_add_features_and_fields_to_company_info_collection',
+  },
+  {
+    up: migration_20260713_142620_add_courses_collection.up,
+    down: migration_20260713_142620_add_courses_collection.down,
+    name: '20260713_142620_add_courses_collection'
   },
 ];
