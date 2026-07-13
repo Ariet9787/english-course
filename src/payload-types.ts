@@ -76,6 +76,7 @@ export interface Config {
     posts: Post;
     lessons: Lesson;
     courses: Course;
+    features: Feature;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    features: FeaturesSelect<false> | FeaturesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -340,6 +342,18 @@ export interface Course {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "features".
+ */
+export interface Feature {
+  id: number;
+  title: string;
+  description: string;
+  icon: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -397,6 +411,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'features';
+        value: number | Feature;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -599,6 +617,17 @@ export interface CoursesSelect<T extends boolean = true> {
   finishDay?: T;
   price?: T;
   image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "features_select".
+ */
+export interface FeaturesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }

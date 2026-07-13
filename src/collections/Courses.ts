@@ -7,6 +7,9 @@ export const Courses: CollectionConfig = {
     singular: 'Курс',
     plural: 'Курсы',
   },
+  admin: {
+    useAsTitle: 'title',
+  },
   fields: [
     {
       name: 'title',
