@@ -5,7 +5,7 @@ import { array, number, relationship } from 'payload/shared'
 export const Company: GlobalConfig = {
   slug: 'website-info',
   access: {
-    read: companyReadAccess,
+    read: () => true,
   },
   label: {
     singular: 'Компания',

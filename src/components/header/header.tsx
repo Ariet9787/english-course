@@ -1,26 +1,13 @@
-import './header.css'
-import ComponentLink from '../component-link/link'
-import Logo from '../logo/logo'
+import { Media } from '@/payload-types'
+import { getWebsiteInfo } from '@/lib/apiServices'
+import HeaderClient from './headerClient'
 
 export default async function Header() {
+  const company = await getWebsiteInfo()
   return (
-    <header>
-      <div className="wrapper">
-        <Logo />
-        <ul className="header-nav">
-          <li>
-            <ComponentLink to="/">Home</ComponentLink>
-          </li>
-          <li>
-            <ComponentLink to="/about">About</ComponentLink>
-          </li>
-          <li>
-            <ComponentLink to="/spelling-choise">Spelling Bee</ComponentLink>
-          </li>
-          <li>
-            <ComponentLink to="/contacts">Contact</ComponentLink>
-          </li>
-        </ul>
+    <header className="sticky top-0 z-50 border-b border-sky-200/60 bg-white/90 shadow-[0_6px_30px_rgba(38,104,139,0.08)] backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+        <HeaderClient logo={company.logo as Media} />
       </div>
     </header>
   )

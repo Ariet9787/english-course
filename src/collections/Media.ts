@@ -8,7 +8,7 @@ export const Media: CollectionConfig = {
     plural: 'Медиа',
   },
   access: {
-    read: mediaReadAccess,
+    read: () => true
   },
   fields: [
     {
