@@ -9,7 +9,7 @@ export default async function HomePage() {
   return (
     <>
       <CompanyIntroSection company={webInfo} />
-      <CoursesSection courses={courses.docs} />
+      <CoursesSection courses={courses.docs} whatsAppNumber={webInfo.WhatsApp} />
     </>
   )
 }
