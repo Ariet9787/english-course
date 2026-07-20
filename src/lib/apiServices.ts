@@ -8,6 +8,8 @@ export const getAboutUs = async () => payload.findGlobal({ slug: 'about-us' })
 
 export const getPosts = async () => payload.find({ collection: 'posts' })
 
+export const getCourses = async () => payload.find({ collection: 'courses', limit: 20 })
+
 export const getSocials = async () =>
   payload.find({
     collection: 'socials',

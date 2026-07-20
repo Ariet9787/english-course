@@ -8,10 +8,10 @@ interface CompanyIntroSectionProps {
 
 export default function CompanyIntroSection({ company }: CompanyIntroSectionProps) {
   const banner = typeof company.banner === 'object' ? (company.banner as Media) : null
-  const features = company.features?.slice(0, 3) || []
-
+  const features = company.features || []
+// border-2 border-solid border-blue-200
   return (
-    <section className="relative isolate overflow-hidden bg-linear-to-br from-sky-50 via-white to-pink-50 px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <section className="relative isolate overflow-hidden bg-linear-to-br from-sky-50 via-white to-pink-50 px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ">
       <div className="absolute -left-28 top-10 -z-10 size-72 rounded-full bg-sky-200/40 blur-3xl" />
       <div className="absolute -right-20 top-1/3 -z-10 size-80 rounded-full bg-pink-200/35 blur-3xl" />
       <div className="absolute bottom-0 left-1/2 -z-10 size-56 -translate-x-1/2 rounded-full bg-amber-100/70 blur-3xl" />
@@ -35,16 +35,6 @@ export default function CompanyIntroSection({ company }: CompanyIntroSectionProp
             <Link href="/about" className="rounded-xl border border-pink-200 bg-white/80 px-6 py-3.5 text-sm font-bold text-slate-700 transition hover:-translate-y-0.5 hover:border-pink-300 hover:bg-pink-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-400 motion-reduce:transition-none">Узнать о нас</Link>
           </div>
 
-          {features.length > 0 && (
-            <ul className="mt-10 grid gap-3 sm:grid-cols-3">
-              {features.map((feature, index) => (
-                <li key={feature.id || index} className="rounded-2xl border border-white/80 bg-white/70 p-4 shadow-sm backdrop-blur-sm">
-                  <span className="mb-2 grid size-8 place-items-center rounded-lg bg-amber-100 text-sm font-extrabold text-amber-600">0{index + 1}</span>
-                  <p className="text-sm font-semibold leading-5 text-slate-700">{feature.description}</p>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
 
         <div className="relative mx-auto w-full max-w-xl">
@@ -63,6 +53,8 @@ export default function CompanyIntroSection({ company }: CompanyIntroSectionProp
           <div className="absolute -right-3 -top-4 grid size-16 place-items-center rounded-2xl bg-amber-200 text-xl shadow-lg sm:size-20 sm:text-2xl">★</div>
         </div>
       </div>
+
+
     </section>
   )
 }
