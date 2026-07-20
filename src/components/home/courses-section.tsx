@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 interface CoursesSectionProps {
   courses: Course[]
-  whatsAppNumber: string
+  whatsAppNumber?: string | null
 }
 
 const formatDate = (date: string) =>
@@ -11,7 +11,8 @@ const formatDate = (date: string) =>
 
 export default function CoursesSection({ courses, whatsAppNumber }: CoursesSectionProps) {
   const displayedCourses = courses.slice(0, 3)
-  const whatsAppLink = `https://wa.me/${whatsAppNumber.replace(/\D/g, '')}`
+  const phoneNumber = whatsAppNumber?.replace(/\D/g, '')
+  const whatsAppLink = phoneNumber ? `https://wa.me/${phoneNumber}` : '/contacts'
 
   if (displayedCourses.length === 0) return null
 
