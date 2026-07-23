@@ -159,7 +159,15 @@ export default function DashboardClient({ student, groups }: DashboardClientProp
             <aside>
               <div>
                 <h2>Оценки</h2>
-                <p>{selectedLesson.grades}</p>
+                {selectedLesson.grades && selectedLesson.grades.length > 0 ? (
+                  <ul>
+                    {selectedLesson.grades.map((grade, index) => (
+                      <li key={index}>{/* тут поля grade, см. ниже */}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Оценок пока нет</p>
+                )}
               </div>
             </aside>
 
