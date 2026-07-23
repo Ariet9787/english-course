@@ -6,10 +6,11 @@ import PostsSection from '@/components/home/posts-section'
 import { getAllPosts, getCourses, getFeatures, getRecentPosts, getWebsiteInfo } from '@/lib/apiServices'
 
 export default async function HomePage() {
-  const webInfo = await getWebsiteInfo()
-  const courses = await getCourses()
-  const features = await getFeatures()
-  const posts = await getRecentPosts()
+  const webInfo = (await getWebsiteInfo()) ?? {}
+  const courses = (await getCourses()) ?? { docs: [] }
+  const features = (await getFeatures()) ?? { docs: [] }
+  const posts = (await getRecentPosts()) ?? { docs: [] }
+
   return (
     <>
       <CompanyIntroSection company={webInfo} />
@@ -18,7 +19,6 @@ export default async function HomePage() {
       <PostsSection posts={posts.docs} />
       <br className='h-1 bg-slate-800' />
       <ContactsSection address={webInfo.addres} whatsAppNumber={webInfo.WhatsApp} phone={webInfo.phone} />
-
     </>
   )
 }
