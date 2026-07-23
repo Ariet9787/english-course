@@ -27,8 +27,7 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // Ищем документ в коллекции `students`, привязанный к текущему авторизованному user'у.
-  // depth: 2 достаточно, чтобы раскрыть student -> group (group.teacher тоже развернётся).
+
   const studentsResult = await payload.find({
     collection: 'students',
     where: {
@@ -37,22 +36,20 @@ export default async function DashboardPage() {
     depth: 2,
     limit: 1,
     user: authUser,
-    overrideAccess: false, // уважаем access-контроль из studentReadAccess
+    overrideAccess: false,
   })
 
   const studentDoc = studentsResult.docs[0]
 
   if (!studentDoc) {
-    // У авторизованного user'а нет связанной анкеты студента
+
     redirect('/login')
   }
 
-  // У студента только одна группа
+
   const group = (studentDoc as any).group
 
-  // Уроки не хранятся внутри группы — в схеме Lessons есть поле `group`,
-  // которое ссылается НА группу, а не наоборот. Поэтому уроки нужно
-  // запрашивать отдельно, фильтруя по id группы.
+
   let lessons: any[] = []
 
   if (group) {
@@ -61,18 +58,16 @@ export default async function DashboardPage() {
       where: {
         group: { equals: group.id },
       },
-      sort: 'date', // сортировка по дате урока (в схеме Lessons нет поля order)
-      depth: 1, // чтобы lessonMaterials развернулись из id в объекты media
+      sort: 'date',
+      depth: 1,
       limit: 200,
       user: authUser,
-      overrideAccess: false, // уважаем access-контроль из lessonReadAccess
+      overrideAccess: false,
     })
 
     lessons = lessonsResult.docs
   }
 
-  // Оборачиваем в массив групп, чтобы переиспользовать UI с аккордеоном,
-  // и приклеиваем найденные уроки к группе вручную.
   const groups = group ? [{ ...group, lessons }] : []
 
   return <DashboardClient student={studentDoc} groups={groups} />
