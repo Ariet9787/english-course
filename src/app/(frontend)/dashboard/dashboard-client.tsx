@@ -13,7 +13,7 @@ interface GradeEntry {
 }
 
 interface Lesson {
-  id: string
+  id: number
   title: string
   content?: unknown
   lessonMaterials?: Media[]
@@ -23,13 +23,13 @@ interface Lesson {
 }
 
 interface Group {
-  id: string
+  id: number
   title: string
   lessons?: Lesson[]
 }
 
 interface StudentDoc {
-  id: string
+  id: number
   fullName: string
   level?: string
 }
@@ -47,12 +47,12 @@ function formatDate(isoString: string): string {
   })
 }
 export default function DashboardClient({ student, groups }: DashboardClientProps) {
-  const [openGroupId, setOpenGroupId] = useState<string | null>(groups[0]?.id ?? null)
+  const [openGroupId, setOpenGroupId] = useState<number | null>(groups[0]?.id ?? null)
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(
     groups[0]?.lessons?.[0] ?? null,
   )
 
-  const toggleGroup = (groupId: string) => {
+  const toggleGroup = (groupId: number) => {
     setOpenGroupId((current) => (current === groupId ? null : groupId))
   }
   console.log(selectedLesson)
