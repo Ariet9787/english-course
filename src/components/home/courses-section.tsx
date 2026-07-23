@@ -51,3 +51,5 @@ export default function CoursesSection({ courses, whatsAppNumber }: CoursesSecti
     </section>
   )
 }
+// Вход в header - для студентов, учителя,
+// Особенности, новости, контакты
